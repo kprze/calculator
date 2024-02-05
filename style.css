@@ -1,0 +1,18 @@
+button{
+    width: 40px;
+}
+
+.calcualtor{
+    display: flex;
+    flex-direction: column;
+}
+
+.row{
+    margin: 2px;
+    width: 172px;
+}
+
+#display{
+    width: 172px;
+    background-color: rgb(0,180,0);
+}
