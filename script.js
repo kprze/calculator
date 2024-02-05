@@ -32,7 +32,7 @@ function processInputValue(inputValue){
         if(value1 == null && result == null){
             value1 = parseInt(userInput.join(''));
             userInput.length = 0;
-            return operator = inputValue;
+            return operator = inputValue; 
         } else if (value1 == null & result != null){
             return operator = inputValue;
         };
@@ -41,36 +41,17 @@ function processInputValue(inputValue){
     if(inputValue == buttonValues.equal){
         value2 = parseInt(userInput.join(''));
         userInput.length = 0;
-
-        if(value1 == null && result != null){
-            switch(operator){
-                case '+': addition(value1,value2)
-                break;
-                case '-': subtraction(value1,value2)
-                break;
-                case '*': multiplication(value1,value2)
-                break;
-                case '/': division(value1,value2)
-                break;
-            };
+        switch(operator){
+            case '+': addition(value1,value2)
+            break;
+            case '-': subtraction(value1,value2)
+            break;
+            case '*': multiplication(value1,value2)
+            break;
+            case '/': division(value1,value2)
+            break;
         };
-
-        if(value1 != null && result != null){
-            switch(operator){
-                case '+': addition(value1,value2)
-                break;
-                case '-': subtraction(value1,value2)
-                break;
-                case '*': multiplication(value1,value2)
-                break;
-                case '/': division(value1,value2)
-                break;
-            };
-        };
-
         value1 = null;
-        value2 = null;
-        operator = null;
         return result;
     };
 
