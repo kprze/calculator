@@ -3,6 +3,8 @@ let secondVal;
 let operator;
 let displayValue = [];
 
+let buttons = document.querySelectorAll('button');
+
 getInputValue();
 
 function getInputValue(){
