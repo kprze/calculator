@@ -8,7 +8,7 @@ getInputValue();
 function getInputValue(){
     buttons.forEach(function(button){
         button.addEventListener("click", function() {
-            console.log(processInputValue(this.id));
+            console.log(operate(this.id));
         });
     });
 };
