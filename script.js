@@ -6,6 +6,7 @@ let displayValue = [];
 let buttons = document.querySelectorAll('button');
 
 getInputValue();
+add(firstVal,secondVal)
 
 function getInputValue(){
     buttons.forEach(function(button){
@@ -16,21 +17,30 @@ function getInputValue(){
 };
 
 function operate(inputValue){
-
+    displayValue.push(inputValue)
+    console.log(displayValue)
 }
 
-function add(firstVal, secondVal, operator){
-
+function display(){
+    
 }
 
-function subtract(firstVal, secondVal, operator){
-
+function add(firstVal, secondVal){
+    console.log(firstVal + secondVal)
+    return firstVal + secondVal;
 }
 
-function multiply(firstVal, secondVal, operator){
-
+function subtract(firstVal, secondVal){
+    console.log(firstVal - secondVal)
+    return firstVal - secondVal;
 }
 
-function divide(firstVal, secondVal, operator){
+function multiply(firstVal, secondVal){
+    console.log(firstVal * secondVal)
+    return firstVal * secondVal;
+}
 
+function divide(firstVal, secondVal){
+    console.log(firstVal / secondVal)
+    return firstVal / secondVal;
 }
