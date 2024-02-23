@@ -1,11 +1,12 @@
-let firstVal;
-let secondVal;
-let operator;
-let userInput = [];
+let firstVal = null;
+let secondVal = null;
+let firstOp = null;
+let secondOp = null;
+let displayValue = null;
+let operators = ['+', '-', '*', '/'];
 
 let buttons = document.querySelectorAll('button');
 let display = document.getElementById('display');
-console.log(display)
 
 getInputValue();
 
@@ -13,22 +14,39 @@ getInputValue();
 function getInputValue(){
     buttons.forEach(function(button){
         button.addEventListener("click", function() {
-            processInputValue(this.id);
-            displayValue(userInput)
+            if(this.id === 'operand'){
+                updateDisplay(this.value)
+            } else if(this.id === 'operator'){
+
+            }
         });
     });
 };
 
-function displayValue(userInput){
-    display.textContent = userInput.join('');
+function updateDisplay(userInput){
+    if(displayValue == null){
+        displayValue = userInput
+    } else {
+        displayValue = displayValue + userInput
+    }
+    display.textContent = displayValue;
 }
 
 function processInputValue(inputValue){
-    userInput.push(inputValue);
+
 }
 
-function operate(){
-    
+function operate(firstVal, secondVal, currOperator){
+    switch(currOperator){
+        case '+': add(firstVal, secondVal)
+        break;
+        case '-': subtract(firstVal, secondVal)
+        break;
+        case '*': multiply(firstVal, secondVal)
+        break;
+        case '/': divide(firstVal, secondVal)
+        break;
+    }
 }
 
 function add(firstVal, secondVal){
