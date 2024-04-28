@@ -1,12 +1,12 @@
-let value1 = null;
-let value2 = null;
-let operator1 = null;
-let operator2 = null;
-let displayValue = null;
-let result = null;
+value1 = null;
+value2 = null;
+operator1 = null;
+operator2 = null;
+displayValue = null;
+result = null;
 
-let buttons = document.querySelectorAll('button');
-let display = document.getElementById('display');
+buttons = document.querySelectorAll('button');
+display = document.getElementById('display');
 
 getInputValue();
 
@@ -19,7 +19,7 @@ function getInputValue(){
             } else if(this.className == 'operator'){
                 processOperator(this.value);
             } else if(this.className == 'equals'){
-                processEquals(this.value);
+                processEquals();
             }
         });
     });
@@ -55,12 +55,34 @@ function processOperand(userInput){
     }
 }
 
-function processEquals(userInput){
-
+function processEquals(){
+    if(operator1 == null){
+        displayValue = displayValue;
+    } else if(operator2 != null){
+        result = operate(value1, value2, operator2)
+        value1 = result;
+        value2 = null;
+        operator1 = null;
+        operator2 = null;
+    } else {
+        result = operate(value1, value2, operator1)
+        value1 = result;
+        value2 = null;
+        operator1 = null;
+        operator2 = null;
+    }
+    updateDisplay(result);
 }
 
 function operate(value1, value2, operator){
-
+    value1 = Number(value1)
+    value2 = Number(value2)
+    switch(operator){
+        case "+": return add(value1,value2)
+        case "-": return subtract(value1,value2)
+        case "*": return multiply(value1,value2)
+        case "/": return divide(value1,value2)
+    }
 }
 
 function add(value1, value2){
