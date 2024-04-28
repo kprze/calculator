@@ -14,7 +14,6 @@ function getInputValue(){
     buttons.forEach(function(button){
         button.addEventListener("click", function() {
             if(this.className == 'operand'){
-                // updateDisplay(this.value);
                 processOperand(this.value)
             } else if(this.className == 'operator'){
                 processOperator(this.value);
@@ -34,14 +33,21 @@ function processOperator(userInput){
         operator1 = userInput;
     } else if(operator2 == null){
         operator2 = userInput;
+        result = operate(value1, value2, operator1)
+        value1 = result;
+        value2 = null;
+        updateDisplay(result);
     }
 }
 
 function processOperand(userInput){
-    if(operator1 == null && operator2 == null){
+    if(operator1 == null && operator2 == null && result == null){
         if(value1 == null){
             value1 = userInput;
-        } else if(value1 != null){
+        } else if(value1 != null && value1 == result){
+            result = null;
+            value1 = userInput;
+        } else {
             value1 += userInput;
         }
         updateDisplay(value1);
