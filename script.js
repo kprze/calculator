@@ -49,19 +49,16 @@ function processOperator(userInput){
 
 function processOperand(userInput){
     if(operator1 == null && operator2 == null && result == null){
-        if(value1 == null){
-            value1 = userInput;
-        } else if(value1 != null && value1 == result){
-            result = null;
+        if(value1 === null){
             value1 = userInput;
         } else {
             value1 += userInput;
         }
         updateDisplay(value1);
     } else {
-        if(value2 == null){
+        if(value2 === null){
             value2 = userInput;
-        } else if(value2 != null){
+        } else {
             value2 += userInput;
         }
         updateDisplay(value2); 
@@ -71,15 +68,12 @@ function processOperand(userInput){
 function processEquals(){
     if(operator1 == null){
         displayValue = displayValue;
-    } else if(operator2 != null){
-        result = operate(value1, value2, operator2)
-        value1 = result;
-        value2 = null;
-        operator1 = null;
-        operator2 = null;
-        point = false;
     } else {
-        result = operate(value1, value2, operator1)
+        if(operator2 != null){
+            result = operate(value1, value2, operator2)
+        } else {
+            result = operate(value1, value2, operator1)
+        }
         value1 = result;
         value2 = null;
         operator1 = null;
@@ -119,7 +113,7 @@ function processPoint(point){
             result = null;
             value1 = 0 + '.';
         } else {
-            value1 += point;
+            value1 += '.';
         }
         updateDisplay(value1);
     } else {
