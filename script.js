@@ -9,28 +9,43 @@ point = false;
 buttons = document.querySelectorAll('button');
 display = document.getElementById('display');
 
-getInputValue();
+document.addEventListener("keydown", (event) => {
+    const button = document.querySelector(`button[value="${event.key}"]`);
+    if (button){
+        if(button.className === 'operand'){
+            processOperand(button.value)
+        } else if(button.className === 'operator'){
+            processOperator(button.value);
+        } else if(button.className === 'equals'){
+            processEquals();
+        } else if (button.className === 'point'){
+            if(point === false){processPoint(point)};
+            point = true;
+        } else if(button.className === 'c'){
+            clear();
+        }
+    }
+});
 
-function getInputValue(){
-    buttons.forEach(function(button){
-        button.addEventListener("click", function() {
-            if(this.className === 'operand'){
-                processOperand(this.value)
-            } else if(this.className === 'operator'){
-                processOperator(this.value);
-            } else if(this.className === 'equals'){
-                processEquals();
-            } else if (this.className === 'point'){
-                if(point === false){processPoint(point)};
-                point = true;
-            } else if(this.className === 'clear'){
-                clear();
-            }
-        });
+buttons.forEach(function(button){
+    button.addEventListener("click", function() {
+        if(this.className === 'operand'){
+            processOperand(this.value)
+        } else if(this.className === 'operator'){
+            processOperator(this.value);
+        } else if(this.className === 'equals'){
+            processEquals();
+        } else if (this.className === 'point'){
+            if(point === false){processPoint(point)};
+            point = true;
+        } else if(this.className === 'c'){
+            clear();
+        }
     });
-};
+});
 
 function updateDisplay(userInput){
+    if(display.textContent)
     display.textContent = userInput;
 }
 
@@ -38,23 +53,26 @@ function processOperator(userInput){
     if(operator1 === null){
         operator1 = userInput;
     } else if(operator2 === null){
-        operator2 = userInput;
         result = operate(value1, value2, operator1)
+        operator2 = userInput;
         value1 = result;
         value2 = null;
         point = false;
         updateDisplay(result);
-    } else {
+    } else if (operator2 != null && value2 != null){
         result = operate(value1, value2, operator2)
         operator2 = userInput;
         value1 = result;
         value2 = null;
         point = false;
         updateDisplay(result);        
+    } else {
+        operator2 = userInput;    
     }
 }
 
 function processOperand(userInput){
+    point = false;
     if(operator1 === null && operator2 === null && result === null){
         if(value1 === null){
             value1 = userInput;
@@ -81,13 +99,17 @@ function processEquals(){
         } else {
             result = operate(value1, value2, operator1)
         }
-        value1 = result;
-        value2 = null;
-        operator1 = null;
-        operator2 = null;
-        point = false;
     }
-    updateDisplay(result);
+    if(result === null){
+        updateDisplay(0)
+    } else {
+        updateDisplay(result);
+    }
+    value1 = result;
+    value2 = null;
+    operator1 = null;
+    operator2 = null;
+    point = false;
 }
 
 function operate(value1, value2, operator){
@@ -125,9 +147,9 @@ function processPoint(point){
         updateDisplay(value1);
     } else {
         if(value2 === null){
-            value2 = userInput;
+            value2 = 0 + '.';
         } else if(value2 != null){
-            value2 += userInput;
+            value2 += '.';
         }
         updateDisplay(value2); 
     }
