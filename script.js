@@ -12,6 +12,7 @@ display = document.getElementById('display');
 document.addEventListener("keydown", (event) => {
     const button = document.querySelector(`button[value="${event.key}"]`);
     if (button){
+        console.log('Key: ', event.key, typeof(event.key), '\nHtml: ', button.value, typeof(button.value), button.className)
         if(button.className === 'operand'){
             processOperand(button.value)
         } else if(button.className === 'operator'){
@@ -21,7 +22,7 @@ document.addEventListener("keydown", (event) => {
         } else if (button.className === 'point'){
             if(point === false){processPoint(point)};
             point = true;
-        } else if(button.className === 'c'){
+        } else if(button.className === 'clear'){
             clear();
         }
     }
@@ -36,7 +37,7 @@ buttons.forEach(function(button){
         } else if(this.className === 'equals'){
             processEquals();
         } else if (this.className === 'point'){
-            if(point === false){processPoint(point)};
+            if(point === false){processPoint()};
             point = true;
         } else if(this.className === 'c'){
             clear();
@@ -134,7 +135,7 @@ function clear(){
     updateDisplay(0);
 }
 
-function processPoint(point){
+function processPoint(){
     if(operator1 === null && operator2 === null && result === null){
         if(value1 === null){
             value1 = 0 + '.';
