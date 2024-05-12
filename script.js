@@ -14,16 +14,16 @@ getInputValue();
 function getInputValue(){
     buttons.forEach(function(button){
         button.addEventListener("click", function() {
-            if(this.className == 'operand'){
+            if(this.className === 'operand'){
                 processOperand(this.value)
-            } else if(this.className == 'operator'){
+            } else if(this.className === 'operator'){
                 processOperator(this.value);
-            } else if(this.className == 'equals'){
+            } else if(this.className === 'equals'){
                 processEquals();
-            } else if (this.className == 'point'){
-                if(point == false){processPoint(point)};
+            } else if (this.className === 'point'){
+                if(point === false){processPoint(point)};
                 point = true;
-            } else if(this.className == 'clear'){
+            } else if(this.className === 'clear'){
                 clear();
             }
         });
@@ -35,26 +35,33 @@ function updateDisplay(userInput){
 }
 
 function processOperator(userInput){
-    if(operator1 == null){
+    if(operator1 === null){
         operator1 = userInput;
-    } else if(operator2 == null){
+    } else if(operator2 === null){
         operator2 = userInput;
         result = operate(value1, value2, operator1)
         value1 = result;
         value2 = null;
         point = false;
         updateDisplay(result);
+    } else {
+        result = operate(value1, value2, operator2)
+        operator2 = userInput;
+        value1 = result;
+        value2 = null;
+        point = false;
+        updateDisplay(result);        
     }
 }
 
 function processOperand(userInput){
-    if(operator1 == null && operator2 == null && result == null){
+    if(operator1 === null && operator2 === null && result === null){
         if(value1 === null){
             value1 = userInput;
         } else {
             value1 += userInput;
         }
-        updateDisplay(value1);
+        updateDisplay(value1);   
     } else {
         if(value2 === null){
             value2 = userInput;
@@ -66,7 +73,7 @@ function processOperand(userInput){
 }
 
 function processEquals(){
-    if(operator1 == null){
+    if(operator1 === null){
         displayValue = displayValue;
     } else {
         if(operator2 != null){
@@ -106,10 +113,10 @@ function clear(){
 }
 
 function processPoint(point){
-    if(operator1 == null && operator2 == null && result == null){
-        if(value1 == null){
+    if(operator1 === null && operator2 === null && result === null){
+        if(value1 === null){
             value1 = 0 + '.';
-        } else if(value1 != null && value1 == result){
+        } else if(value1 != null && value1 === result){
             result = null;
             value1 = 0 + '.';
         } else {
@@ -117,7 +124,7 @@ function processPoint(point){
         }
         updateDisplay(value1);
     } else {
-        if(value2 == null){
+        if(value2 === null){
             value2 = userInput;
         } else if(value2 != null){
             value2 += userInput;
@@ -139,7 +146,7 @@ function multiply(value1, value2){
 }
 
 function divide(value1, value2){
-    if(value1 == 0 || value2 == 0){
+    if(value1 === 0 || value2 === 0){
         return 'Haha! Dividing by 0?'
     } else {
         return value1 / value2;
