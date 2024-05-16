@@ -12,13 +12,23 @@ display = document.getElementById('display');
 document.addEventListener("keydown", (event) => {
     const button = document.querySelector(`button[value="${event.key}"]`);
     if (button){
-        processInput(button);
+        if(result == 'Haha! Dividing by 0?')
+        {
+            clear()
+        } else {
+            processInput(button);
+        }
     }
 });
 
 buttons.forEach(function(button){
     button.addEventListener("click", function() {
-        processInput(button);
+        if(result == 'Haha! Dividing by 0?')
+        {
+            clear()
+        } else {
+            processInput(button);
+        }
     });
 });
 
@@ -46,14 +56,14 @@ function processOperator(userInput){
     if(operator1 === null){
         operator1 = userInput;
     } else if(operator2 === null){
-        result = operate(value1, value2, operator1)
+        result = operate(value1, value2, operator1).toPrecision(15)
         operator2 = userInput;
         value1 = result;
         value2 = null;
         point = false;
         updateDisplay(result);
     } else if (operator2 != null && value2 != null){
-        result = operate(value1, value2, operator2)
+        result = operate(value1, value2, operator2).toPrecision(15)
         operator2 = userInput;
         value1 = result;
         value2 = null;
@@ -88,9 +98,9 @@ function processEquals(){
         displayValue = displayValue;
     } else {
         if(operator2 != null){
-            result = operate(value1, value2, operator2)
+            result = operate(value1, value2, operator2).toPrecision(15)
         } else {
-            result = operate(value1, value2, operator1)
+            result = operate(value1, value2, operator1).toPrecision(15)
         }
     }
     if(result === null){
