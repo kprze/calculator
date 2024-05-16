@@ -12,38 +12,30 @@ display = document.getElementById('display');
 document.addEventListener("keydown", (event) => {
     const button = document.querySelector(`button[value="${event.key}"]`);
     if (button){
-        console.log('Key: ', event.key, typeof(event.key), '\nHtml: ', button.value, typeof(button.value), button.className)
-        if(button.className === 'operand'){
-            processOperand(button.value)
-        } else if(button.className === 'operator'){
-            processOperator(button.value);
-        } else if(button.className === 'equals'){
-            processEquals();
-        } else if (button.className === 'point'){
-            if(point === false){processPoint(point)};
-            point = true;
-        } else if(button.className === 'clear'){
-            clear();
-        }
+        processInput(button);
     }
 });
 
 buttons.forEach(function(button){
     button.addEventListener("click", function() {
-        if(this.className === 'operand'){
-            processOperand(this.value)
-        } else if(this.className === 'operator'){
-            processOperator(this.value);
-        } else if(this.className === 'equals'){
-            processEquals();
-        } else if (this.className === 'point'){
-            if(point === false){processPoint()};
-            point = true;
-        } else if(this.className === 'c'){
-            clear();
-        }
+        processInput(button);
     });
 });
+
+function processInput(userInput){
+    if(userInput.className === 'operand'){
+        processOperand(userInput.value)
+    } else if(userInput.className === 'operator'){
+        processOperator(userInput.value);
+    } else if(userInput.className === 'equals'){
+        processEquals();
+    } else if (userInput.className === 'point'){
+        if(point === false){processPoint(point)};
+        point = true;
+    } else if(userInput.className === 'clear'){
+        clear();
+    }
+}
 
 function updateDisplay(userInput){
     if(display.textContent)
