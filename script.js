@@ -56,14 +56,14 @@ function processOperator(userInput){
     if(operator1 === null){
         operator1 = userInput;
     } else if(operator2 === null){
-        result = operate(value1, value2, operator1).toPrecision(15)
+        result = operate(value1, value2, operator1)
         operator2 = userInput;
         value1 = result;
         value2 = null;
         point = false;
         updateDisplay(result);
     } else if (operator2 != null && value2 != null){
-        result = operate(value1, value2, operator2).toPrecision(15)
+        result = operate(value1, value2, operator2)
         operator2 = userInput;
         value1 = result;
         value2 = null;
@@ -98,9 +98,9 @@ function processEquals(){
         displayValue = displayValue;
     } else {
         if(operator2 != null){
-            result = operate(value1, value2, operator2).toPrecision(15)
+            result = operate(value1, value2, operator2)
         } else {
-            result = operate(value1, value2, operator1).toPrecision(15)
+            result = operate(value1, value2, operator1)
         }
     }
     if(result === null){
@@ -159,20 +159,34 @@ function processPoint(){
 }
 
 function add(value1, value2){
-    return value1 + value2;
+    if((Math.abs(value1+value2).toString()).length > 15){
+        return (value1+value2).toPrecision(15)
+    } else {
+        return value1 + value2;
+    }
 }
 
 function subtract(value1, value2){
-    return value1 - value2;
+    if((Math.abs(value1-value2).toString()).length > 15){
+        return (value1-value2).toPrecision(15)
+    } else {
+        return value1 - value2;
+    }
 }
 
 function multiply(value1, value2){
-    return value1 * value2;
+    if((Math.abs(value1*value2).toString()).length > 15){
+        return (value1*value2).toPrecision(15)
+    } else {
+        return value1 * value2;
+    }
 }
 
 function divide(value1, value2){
     if(value1 === 0 || value2 === 0){
         return 'Haha! Dividing by 0?'
+    } else if((Math.abs(value1/value2).toString()).length > 15){
+        return (value1/value2).toPrecision(15)
     } else {
         return value1 / value2;
     }
