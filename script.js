@@ -49,6 +49,7 @@ function processInput(userInput){
 
 function updateDisplay(userInput){
     if(display.textContent)
+    displayValue = userInput.toString();
     display.textContent = userInput;
 }
 
@@ -75,18 +76,17 @@ function processOperator(userInput){
 }
 
 function processOperand(userInput){
-    point = false;
     if(operator1 === null && operator2 === null && result === null){
         if(value1 === null){
             value1 = userInput;
-        } else {
+        } else if (value1.toString().length < 15){
             value1 += userInput;
         }
         updateDisplay(value1);   
     } else {
         if(value2 === null){
             value2 = userInput;
-        } else {
+        } else if (value1.toString().length < 15){
             value2 += userInput;
         }
         updateDisplay(value2); 
@@ -160,7 +160,7 @@ function processPoint(){
 
 function add(value1, value2){
     if((Math.abs(value1+value2).toString()).length > 15){
-        return (value1+value2).toPrecision(15)
+        return (value1+value2).toPrecision(10)
     } else {
         return value1 + value2;
     }
@@ -168,7 +168,7 @@ function add(value1, value2){
 
 function subtract(value1, value2){
     if((Math.abs(value1-value2).toString()).length > 15){
-        return (value1-value2).toPrecision(15)
+        return (value1-value2).toPrecision(10)
     } else {
         return value1 - value2;
     }
@@ -176,7 +176,7 @@ function subtract(value1, value2){
 
 function multiply(value1, value2){
     if((Math.abs(value1*value2).toString()).length > 15){
-        return (value1*value2).toPrecision(15)
+        return (value1*value2).toPrecision(10)
     } else {
         return value1 * value2;
     }
@@ -186,7 +186,7 @@ function divide(value1, value2){
     if(value1 === 0 || value2 === 0){
         return 'Haha! Dividing by 0?'
     } else if((Math.abs(value1/value2).toString()).length > 15){
-        return (value1/value2).toPrecision(15)
+        return (value1/value2).toPrecision(10)
     } else {
         return value1 / value2;
     }
