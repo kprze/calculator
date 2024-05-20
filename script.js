@@ -86,7 +86,7 @@ function processOperand(userInput){
     } else {
         if(value2 === null){
             value2 = userInput;
-        } else if (value1.toString().length < 15){
+        } else if (value2.toString().length < 15){
             value2 += userInput;
         }
         updateDisplay(value2); 
