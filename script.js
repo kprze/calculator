@@ -12,7 +12,7 @@ display = document.getElementById('display');
 document.addEventListener("keydown", (event) => {
     const button = document.querySelector(`button[value="${event.key}"]`);
     if (button){
-        if(result == 'Haha! Dividing by 0?')
+        if(result == 'Yikes!')
         {
             clear()
         } else {
@@ -23,7 +23,7 @@ document.addEventListener("keydown", (event) => {
 
 buttons.forEach(function(button){
     button.addEventListener("click", function() {
-        if(result == 'Haha! Dividing by 0?')
+        if(result == 'Yikes!')
         {
             clear()
         } else {
@@ -79,14 +79,14 @@ function processOperand(userInput){
     if(operator1 === null && operator2 === null && result === null){
         if(value1 === null){
             value1 = userInput;
-        } else if (value1.toString().length < 15){
+        } else if (value1.toString().length < 9){
             value1 += userInput;
         }
         updateDisplay(value1);   
     } else {
         if(value2 === null){
             value2 = userInput;
-        } else if (value2.toString().length < 15){
+        } else if (value2.toString().length < 9){
             value2 += userInput;
         }
         updateDisplay(value2); 
@@ -159,24 +159,24 @@ function processPoint(){
 }
 
 function add(value1, value2){
-    if((Math.abs(value1+value2).toString()).length > 15){
-        return (value1+value2).toPrecision(10)
+    if((Math.abs(value1+value2).toString()).length > 9){
+        return (value1+value2).toPrecision(4)
     } else {
         return value1 + value2;
     }
 }
 
 function subtract(value1, value2){
-    if((Math.abs(value1-value2).toString()).length > 15){
-        return (value1-value2).toPrecision(10)
+    if((Math.abs(value1-value2).toString()).length > 9){
+        return (value1-value2).toPrecision(4)
     } else {
         return value1 - value2;
     }
 }
 
 function multiply(value1, value2){
-    if((Math.abs(value1*value2).toString()).length > 15){
-        return (value1*value2).toPrecision(10)
+    if((Math.abs(value1*value2).toString()).length > 9){
+        return (value1*value2).toPrecision(4)
     } else {
         return value1 * value2;
     }
@@ -184,9 +184,9 @@ function multiply(value1, value2){
 
 function divide(value1, value2){
     if(value1 === 0 || value2 === 0){
-        return 'Haha! Dividing by 0?'
-    } else if((Math.abs(value1/value2).toString()).length > 15){
-        return (value1/value2).toPrecision(10)
+        return 'Yikes!'
+    } else if((Math.abs(value1/value2).toString()).length > 9){
+        return (value1/value2).toPrecision(4)
     } else {
         return value1 / value2;
     }
